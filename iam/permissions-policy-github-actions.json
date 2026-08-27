@@ -1,0 +1,91 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "SageMakerPipelineControl",
+      "Effect": "Allow",
+      "Action": [
+        "sagemaker:CreatePipeline",
+        "sagemaker:UpdatePipeline",
+        "sagemaker:DeletePipeline",
+        "sagemaker:DescribePipeline",
+        "sagemaker:StartPipelineExecution",
+        "sagemaker:StopPipelineExecution",
+        "sagemaker:DescribePipelineExecution",
+        "sagemaker:ListPipelineExecutionSteps",
+        "sagemaker:ListPipelineExecutions",
+        "sagemaker:ListPipelines"
+      ],
+      "Resource": "arn:aws:sagemaker:ap-southeast-1:<AWS_ACCOUNT_ID>:pipeline/iti113-team09-*"
+    },
+    {
+      "Sid": "SageMakerJobVisibility",
+      "Effect": "Allow",
+      "Action": [
+        "sagemaker:DescribeTrainingJob",
+        "sagemaker:DescribeProcessingJob",
+        "sagemaker:DescribeModelPackage",
+        "sagemaker:ListModelPackages",
+        "sagemaker:UpdateModelPackage",
+        "sagemaker:DescribeModelPackageGroup",
+        "sagemaker:CreateModelPackageGroup",
+        "sagemaker:ListTags"
+      ],
+      "Resource": [
+        "arn:aws:sagemaker:ap-southeast-1:<AWS_ACCOUNT_ID>:training-job/iti113-team09-*",
+        "arn:aws:sagemaker:ap-southeast-1:<AWS_ACCOUNT_ID>:processing-job/iti113-team09-*",
+        "arn:aws:sagemaker:ap-southeast-1:<AWS_ACCOUNT_ID>:model-package/team09-*",
+        "arn:aws:sagemaker:ap-southeast-1:<AWS_ACCOUNT_ID>:model-package-group/team09-*"
+      ]
+    },
+    {
+      "Sid": "SageMakerModelAndTrainingCreation",
+      "Effect": "Allow",
+      "Action": [
+        "sagemaker:CreateModel",
+        "sagemaker:CreateTrainingJob",
+        "sagemaker:CreateProcessingJob",
+        "sagemaker:AddTags"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:RequestTag/Team": "team09"
+        }
+      }
+    },
+    {
+      "Sid": "PassSageMakerExecutionRole",
+      "Effect": "Allow",
+      "Action": "iam:PassRole",
+      "Resource": "arn:aws:iam::<AWS_ACCOUNT_ID>:role/<SAGEMAKER_EXECUTION_ROLE_NAME>",
+      "Condition": {
+        "StringEquals": {
+          "iam:PassedToService": "sagemaker.amazonaws.com"
+        }
+      }
+    },
+    {
+      "Sid": "S3TeamPrefixOnly",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:PutObject",
+        "s3:ListBucket"
+      ],
+      "Resource": [
+        "arn:aws:s3:::nyp-26s1-iti113",
+        "arn:aws:s3:::nyp-26s1-iti113/iti113/team09/*"
+      ]
+    },
+    {
+      "Sid": "ReadLogsOnFailure",
+      "Effect": "Allow",
+      "Action": [
+        "logs:DescribeLogStreams",
+        "logs:GetLogEvents"
+      ],
+      "Resource": "arn:aws:logs:ap-southeast-1:<AWS_ACCOUNT_ID>:log-group:/aws/sagemaker/*"
+    }
+  ]
+}

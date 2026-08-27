@@ -1,0 +1,22 @@
+# Local MLflow presigned URLs -- never commit these (see Notebook 05, Section 5)
+.mlflow_ui_url.local.txt
+
+# MLflow app config files may contain team/account-specific ARNs
+mlflow_app_config_*.json
+
+# Local pipeline source staging (downloaded copy used by earlier notebook workflow)
+pipeline_src/
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Local artifacts produced by Notebook 05
+threshold_sweep.png
+threshold_sweep.csv
+model_comparison_extended.png
+shap_global_importance.png
+system_architecture.png
+drift_baseline.json
+best_model.json

@@ -1,0 +1,30 @@
+{
+  "team_id": "team09",
+  "student_id": "s901",
+  "course": "ITI113",
+  "semester": "26S1",
+  "project_name": "bank-fraud-detection",
+  "region": "ap-southeast-1",
+
+  "bucket": "nyp-26s1-iti113",
+
+  "pipeline_name": "iti113-team09-bank-fraud-detection",
+  "model_package_group": "team09-BankFraudDetection",
+  "endpoint_name": "iti113-team09-bank-fraud-detection",
+
+  "processing_instance_type": "ml.m5.large",
+  "training_instance_type": "ml.m5.large",
+  "inference_instance": "ml.m5.large",
+  "transform_instance": "ml.m5.large",
+
+  "quality_gate_auc": 0.70,
+
+  "pipeline_parameters": {
+    "NEstimators": 150,
+    "MaxDepth": 8,
+    "MinSamplesLeaf": 2,
+    "QualityGateAUC": 0.70
+  },
+
+  "_comment": "Mirrors Notebook 03 cell 2 config exactly. RAW_DATA_URI / PIPELINE_ROOT / SCRIPTS_S3_URI are all derived from bucket + team_id + project_name at runtime by pipeline/build_pipeline.py — do not hardcode another team's values here."
+}
